@@ -1,0 +1,32 @@
+using System;
+public class Program {
+	public static int LongestPeak(int[] array) {
+		int len = array.Length;
+	    int i = 1;
+		int j = len  - 1;
+		int r = 0;
+		while(i < j)
+		{
+			bool isPeak = array[i - 1] < array[i] && array[i] > array[i + 1];
+			if (!isPeak)
+			{
+			   i++;
+				 continue;
+			}
+			int left = i - 2;
+			while(left >= 0 && array[left] < array[left + 1])
+			{
+				left--;
+			}
+			int right = i + 2;
+			while(right < len && array[right] < array[right - 1])
+			{
+				right++;
+			}
+			r = Math.Max(r, (right - left - 1));
+			i = right;
+		}
+		
+		return r;
+	}
+}
